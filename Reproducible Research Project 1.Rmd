@@ -185,4 +185,18 @@ png("plot8.png")
 ggplot(data=Q8.1,aes(y=Steps,x=interval,group=1,color=WDWE))+geom_line() +scale_x_discrete(breaks = seq(0, 2500, by = 300))+ylab("Mean Steps")+xlab("Intervals")+ggtitle("Mean steps across intervals by Weekend and Weekday")
 dev.off()
 ggplot(data=Q8.1,aes(y=Steps,x=interval,group=1,color=WDWE))+geom_line() +scale_x_discrete(breaks = seq(0, 2500, by = 300))+ylab("Mean Steps")+xlab("Intervals")+ggtitle("Mean steps across intervals by Weekend and Weekday")
+
+#Producing the panel plot
+Q8.1$interval<-as.numeric(as.character(Q8.1$interval))
+library(lattice)
+xyplot(data=Q8.1,Steps~interval|WDWE, grid = TRUE, type = c("p", "smooth"), lwd = 4,panel = panel.smoothScatter)
+library(hexbin)
+hexbinplot(data=Q8.1,Steps~interval|WDWE, aspect = 1, bins=50)
+png("plott8.1.png")
+xyplot(data=Q8.1,Steps~interval|WDWE, grid = TRUE, type = c("p", "smooth"), lwd = 4,panel = panel.smoothScatter)
+dev.off()
+
+png("plot8.2.png")
+hexbinplot(data=Q8.1,Steps~interval|WDWE, aspect = 1, bins=50)
+dev.off()
 ```
